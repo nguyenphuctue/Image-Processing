@@ -27,21 +27,9 @@ int main(int argc, char** argv )
 	cvtColor(image, image, CV_BGR2GRAY);
 	string name = std::string(argv[1]);
 	Mat image_result;
-	if (std::string(argv[2]) == "HE") {
-		image_result = equalize_histogram(image);
-		cv::imwrite(name.substr(0, name.length() - 4) + "_" + std::string(argv[2]) + ".jpg", image_result);
-	}
-	else if (std::string(argv[2]) == "AHE") {
+	if (std::string(argv[2]) == "AHE") {
 		image_result = AHE(image, atoi(argv[3]));
 		cv::imwrite(name.substr(0, name.length() - 4) + "_" + std::string(argv[2]) +"_"+string(argv[3]) + ".jpg", image_result);
-	}
-	else if (std::string(argv[2]) == "CLHE") {
-		image_result = equalize_histogram(image, true, atoi(argv[3]));
-		cv::imwrite(name.substr(0, name.length() - 4) + "_" + std::string(argv[2]) + "_"+string(argv[3])+ ".jpg", image_result);
-	}
-	else if (std::string(argv[2]) == "CLAHE") {
-		image_result = AHE(image, atoi(argv[3]),true, atoi(argv[4]));
-		cv::imwrite(name.substr(0, name.length() - 4) + "_" + std::string(argv[2])  +"_" + string(argv[3]) +"_" + string(argv[4])+ ".jpg", image_result);
 	}
 	else if (std::string(argv[2]) == "ACE") {
 		image_result = ACE(image, strtod(argv[3], NULL));
